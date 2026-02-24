@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% block title %}Examination Performance{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <!-- Export Button -->
+  <a href="{{ url_for('export_exams') }}" class="btn btn-primary">
+      📥 Export Performance to Excel
+  </a>
+
+  <!-- Form to Add Yearly Results -->
+  <form method="POST" class="card">
+    <h3>Add Yearly Results</h3>
+
+    <input type="number" name="year" placeholder="Year (e.g. 2024)" required>
+    <input type="number" name="first" placeholder="First Class" required>
+    <input type="number" name="upper" placeholder="Second Class Upper" required>
+    <input type="number" name="lower" placeholder="Second Class Lower" required>
+    <input type="number" name="pass" placeholder="Pass" required>
+    <input type="number" name="fail" placeholder="Fail" required>
+
+    <button class="btn btn-primary">Save Results</button>
+  </form>
+
+  <hr>
+
+  <!-- Performance Summary Table -->
+  <h3>Performance Summary</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>First</th>
+        <th>Upper</th>
+        <th>Lower</th>
+        <th>Pass</th>
+        <th>Fail</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+      <tr>
+        <td>{{ r[0] }}</td>
+        <td>{{ r[1] }}</td>
+        <td>{{ r[2] }}</td>
+        <td>{{ r[3] }}</td>
+        <td>{{ r[4] }}</td>
+        <td>{{ r[5] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Chart -->
+  <canvas id="examChart"></canvas>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const data = {
+  labels: [{% for r in results %}'{{ r[0] }}',{% endfor %}],
+  datasets: [
+    {
+      label: 'First Class',
+      backgroundColor: '#0b7dda',
+      data: [{% for r in results %}{{ r[1] }},{% endfor %}],
+    },
+    {
+      label: 'Pass',
+      backgroundColor: '#28a745',
+      data: [{% for r in results %}{{ r[4] }},{% endfor %}],
+    },
+    {
+      label: 'Fail',
+      backgroundColor: '#dc3545',
+      data: [{% for r in results %}{{ r[5] }},{% endfor %}],
+    }
+  ]
+};
+
+new Chart(document.getElementById('examChart'), {
+  type: 'bar',
+  data: data,
+  options: {
+      responsive: true,
+      plugins: {
+          legend: { position: 'top' },
+          title: { display: true, text: 'School Examination Performance' }
+      }
+  }
+});
+</script>
+
+<!-- Styles -->
+<style>
+.card {
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+
+input { width: 100%; padding: 8px; margin: 5px 0; }
+
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+th { background: #0b7dda; color: white; }
+
+.btn-primary {
+    background: #0b7dda; /* Blue button */
+    color: white;
+    padding: 10px 14px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %}

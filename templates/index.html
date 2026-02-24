@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% block title %}Home | Kirwara Vocational Training Center{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO ===== -->
+<section class="hero" style="background: linear-gradient(rgba(10,75,120,0.8), rgba(10,75,120,0.8)), url('{{ url_for('static', filename='images/hero.jpg') }}') center/cover; color:white; text-align:center; padding:50px 20px;">
+  <h1>Empowering Skills for Employment & Self-Reliance</h1>
+  <p>A government-aligned vocational training center in Kenya</p>
+  <a href="{{ url_for('admissions') }}" style="background:#f9b233; color:#000; padding:10px 22px; text-decoration:none; border-radius:5px; font-weight:bold; margin:5px;">Apply Now</a>
+  <a href="{{ url_for('courses') }}" style="background:transparent; border:2px solid #f9b233; color:#f9b233; padding:10px 22px; text-decoration:none; border-radius:5px; font-weight:bold; margin:5px;">View Courses</a>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section style="padding:60px 20px; max-width:1100px; margin:auto;">
+  <h2 style="text-align:center; color:#0a4b78; margin-bottom:25px;">Why Choose Kirwara VTC</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Competency-Based Education & Training (CBET)</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Industrial Attachment & Internship</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">INTERNAL & NITA Aligned</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Affordable & Flexible Fees</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Modern Workshops & ICT Labs</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Entrepreneurship & Business Skills</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Career Guidance & Mentorship</div>
+    <div style="background:#f9f9f9; padding:20px; border-radius:8px; border-left:4px solid #0a4b78;">Community Empowerment Programs</div>
+  </div>
+</section>
+
+<!-- ===== COURSES ===== -->
+<section style="padding:60px 20px; max-width:1100px; margin:auto;">
+  <h2 style="text-align:center; color:#0a4b78; margin-bottom:25px;">Popular Courses</h2>
+  
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
+    
+    <!-- ICT -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/ict.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>ICT</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">6 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Certificate</span>
+        </div>
+        <p>Computer applications and digital skills.</p>
+      </div>
+    </div>
+
+    <!-- Electrical -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/electrical.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Electrical Installation</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">9 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Artisan</span>
+        </div>
+        <p>Domestic and industrial wiring.</p>
+      </div>
+    </div>
+
+    <!-- Hairdressing -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/hair dressing.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Hairdressing & Beauty</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">9 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Certificate</span>
+        </div>
+        <p>Hairdressing and beauty skills.</p>
+      </div>
+    </div>
+
+    <!-- Plumbing -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/plumbing.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Plumbing</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">6 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Craft</span>
+        </div>
+        <p>Water systems installation and maintenance.</p>
+      </div>
+    </div>
+
+    <!-- Catering -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/catering.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Catering & Food Production</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">6 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Certificate</span>
+        </div>
+        <p>Food preparation, baking, and kitchen hygiene.</p>
+      </div>
+    </div>
+
+    <!-- Mechanical -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/mechanic.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Motor Vehicle Mechanics</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">6 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Artisan</span>
+        </div>
+        <p>Vehicle maintenance and engine repair.</p>
+      </div>
+    </div>
+
+    <!-- Painting -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/painting.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Painting & Decoration</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">3 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Certificate</span>
+        </div>
+        <p>Interior and exterior painting techniques.</p>
+      </div>
+    </div>
+
+    <!-- Tiling -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/tiling.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Tiling</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">3 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Certificate</span>
+        </div>
+        <p>Floor and wall tiling techniques.</p>
+      </div>
+    </div>
+
+    <!-- Fashion & Design -->
+    <div style="border:1px solid #ddd; border-radius:8px; overflow:hidden; background:white;">
+      <img src="{{ url_for('static', filename='images/fashion.jpg') }}" alt="" style="width:100%; height:160px; object-fit:cover;">
+      <div style="padding:15px;">
+        <h3>Fashion Design & Dress Making</h3>
+        <div style="margin:8px 0;">
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px; margin-right:5px;">6 Months</span>
+          <span style="background:#0a4b78; color:white; padding:4px 8px; font-size:12px; border-radius:4px;">Certificate</span>
+        </div>
+        <p>Garment design, tailoring, and fashion production.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ===== ADMISSIONS ===== -->
+<section style="padding:60px 20px; max-width:1100px; margin:auto;">
+  <h2 style="text-align:center; color:#0a4b78; margin-bottom:25px;">Admission Requirements</h2>
+  <ul style="max-width:700px; margin:auto;">
+    <li>✔ Copy of National ID / Birth Certificate</li>
+    <li>✔ KCSE Certificate or Result Slip</li>
+    <li>✔ Passport Size Photos</li>
+    <li>✔ Open to KCPE, KCSE & School Leavers</li>
+  </ul>
+</section>
+
+<!-- ===== PARTNERS ===== -->
+<section style="padding:60px 20px; max-width:1100px; margin:auto;">
+  <h2 style="text-align:center; color:#0a4b78; margin-bottom:25px;">Accreditation & Partners</h2>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:20px; align-items:center; text-align:center;">
+    <div style="border:1px solid #fff; padding:20px; border-radius:50px; background:#fff;">NITA</div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section style="background:#0a4b78; color:white; text-align:center; padding:70px 20px;">
+  <h2>Admissions Ongoing</h2>
+  <p>Join us today and gain skills for life.</p>
+  <a href="{{ url_for('admissions') }}" style="background:#f9b233; color:#000; padding:10px 22px; text-decoration:none; border-radius:5px; font-weight:bold; margin:5px;">Apply Now</a>
+</section>
+
+{% endblock %}

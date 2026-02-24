@@ -1,0 +1,424 @@
+{% extends "base.html" %}
+{% block title %}Home | Kirwara Vocational Training Center{% endblock %}
+
+{% block content %}
+
+<style>
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #222;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4 {
+    color: #0a4b78;
+}
+
+.course {
+    background: #fff;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.course-summary {
+    font-weight: bold;
+}
+
+.course-details {
+    display: none;
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.info-box {
+    background: #e8f1fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 10px 0;
+    display: inline-block;
+    max-width: 100%;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+}
+
+.apply-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #0b7dda;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.toggle-btn {
+    padding: 6px 12px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.instructor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.instructor img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+
+.nita {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .course {
+        flex-direction: column;
+    }
+}
+</style>
+
+<div class="container">
+<h1>Our Courses</h1>
+
+<!-- ICT -->
+<section class="course">
+    <div class="course-content">
+        <h2>Information Communication Technology (ICT)</h2>
+        <p class="course-summary">Learn essential computer and digital skills.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Hands-on training in computer applications, Microsoft Office, internet usage, and programming basics.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/john_mwangi.jpg') }}" alt="John Mwangi">
+                <span>Mr. John Mwangi – ICT Trainer with 8 years experience in digital skills training.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Basic literacy</li>
+                <li>Interest in computers</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 10,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"This course helped me get a job as a data clerk within 3 months!" – Alice N.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Electrical Installation -->
+<section class="course">
+    <div class="course-content">
+        <h2>Electrical Installation</h2>
+        <p class="course-summary">Domestic & industrial wiring.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Training in electrical wiring, safety, maintenance, and fault diagnosis.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/mary_wanjiru.jpg') }}" alt="Mary Wanjiru">
+                <span>Ms. Mary Wanjiru – Electrical Technician with 10 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Basic math skills</li>
+                <li>Interest in electrical work</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 10,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"The practical training prepared me well for industrial wiring tasks." – Peter K.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Plumbing -->
+<section class="course">
+    <div class="course-content">
+        <h2>Plumbing</h2>
+        <p class="course-summary">Water systems & installations.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Training on water supply, drainage, leak detection, and sanitary installations.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/james_kariuki.jpg') }}" alt="James Kariuki">
+                <span>Mr. James Kariuki – Professional Plumber with 12 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in plumbing</li>
+                <li>Basic hand skills</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 10,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I now run my own plumbing business thanks to this course!" – Grace M.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Hairdressing & Beauty -->
+<section class="course">
+    <div class="course-content">
+        <h2>Hairdressing & Beauty Therapy</h2>
+        <p class="course-summary">Salon & beauty skills.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Professional skills for hair styling, beauty therapy, and make-up artistry.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/sarah_kenya.jpg') }}" alt="Sarah Kenya">
+                <span>Ms. Sarah Kenya – Beauty Therapist with 7 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in beauty industry</li>
+                <li>Creativity</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 10,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I gained confidence and started my own beauty salon." – Lydia T.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Catering -->
+<section class="course">
+    <div class="course-content">
+        <h2>Catering & Food Production</h2>
+        <p class="course-summary">Professional culinary training.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Learn food preparation, hygiene, cooking, pastry, and baking.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/julia_mwangi.jpg') }}" alt="Julia Mwangi">
+                <span>Ms. Julia Mwangi – Chef with 9 years culinary experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in culinary arts</li>
+                <li>Basic hygiene knowledge</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 15,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I now work in a 5-star hotel kitchen!" – David N.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Mechanical -->
+<section class="course">
+    <div class="course-content">
+        <h2>Motor Vehicle Mechanics</h2>
+        <p class="course-summary">Hands-on training for vehicle maintenance and repair.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Engine repair, vehicle electrical systems, brake, suspension, and steering systems.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/peter_kariuki.jpg') }}" alt="Peter Kariuki">
+                <span>Mr. Peter Kariuki – Vehicle Mechanic Trainer with 10 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in mechanics</li>
+                <li>Basic technical skills</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 12,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I am now employed at a reputable garage as a motor technician." – Alex M.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Painting -->
+<section class="course">
+    <div class="course-content">
+        <h2>Painting & Decoration</h2>
+        <p class="course-summary">Professional painting techniques.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Interior and exterior painting, surface preparation, and decorative finishing.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/rita_njeri.jpg') }}" alt="Rita Njeri">
+                <span>Ms. Rita Njeri – Painting Instructor with 8 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in painting & decoration</li>
+                <li>Attention to detail</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">3 Months | Fees: KES 8,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I now run my own painting & decorating business." – John K.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Tiling -->
+<section class="course">
+    <div class="course-content">
+        <h2>Tiling</h2>
+        <p class="course-summary">Floor & wall tiling techniques.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Learn tile cutting, alignment, grouting, and finishing techniques.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/kevin_mwangi.jpg') }}" alt="Kevin Mwangi">
+                <span>Mr. Kevin Mwangi – Tiling Trainer with 6 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in construction</li>
+                <li>Basic hand skills</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">3 Months | Fees: KES 8,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I am now a certified professional tiler." – Alice W.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Fashion & Design -->
+<section class="course">
+    <div class="course-content">
+        <h2>Fashion Design & Dress Making</h2>
+        <p class="course-summary">Creative skills in garment design & tailoring.</p>
+        <button class="toggle-btn" onclick="toggleDetails(this)">Learn More ⌄</button>
+        <div class="course-details">
+            <h4>About the Course</h4>
+            <p>Pattern drafting, garment construction, fashion illustration, and creative design.</p>
+            
+            <h4>Instructor</h4>
+            <div class="instructor">
+                <img src="{{ url_for('static', filename='images/instructors/anne_wanjiru.jpg') }}" alt="Anne Wanjiru">
+                <span>Ms. Anne Wanjiru – Fashion Designer & Trainer with 7 years experience.</span>
+            </div>
+            
+            <h4>Requirements</h4>
+            <ul>
+                <li>Interest in fashion</li>
+                <li>Creativity & attention to detail</li>
+            </ul>
+            
+            <h4>Duration</h4>
+            <div class="info-box">6 Months | Fees: KES 12,000</div>
+            
+            <h4>Testimonials</h4>
+            <p>"I now run my own boutique thanks to this course." – Fiona L.</p>
+            
+            <a href="{{ url_for('admissions') }}" class="apply-btn">Apply Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- NITA -->
+<section class="nita">
+    <h2>NITA Examinations</h2>
+    <p>We prepare trainees for NITA Grade III, II & I examinations. Certification improves employability.</p>
+</section>
+
+</div>
+
+<script>
+function toggleDetails(button) {
+    const details = button.nextElementSibling;
+    if (details.style.display === "block") {
+        details.style.display = "none";
+        button.innerHTML = "Learn More ⌄";
+    } else {
+        details.style.display = "block";
+        button.innerHTML = "Show Less ▲";
+    }
+}
+</script>
+
+{% endblock %}
+
+
+

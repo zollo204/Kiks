@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Contact Us | Kirwara VTC{% endblock %}
+
+{% block content %}
+<style>
+/* ===== Contact Page Styling ===== */
+.contact-wrapper {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.contact-wrapper h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #0a4b78;
+}
+
+.contact-wrapper p {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+#contactForm textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+#contactForm input[type="file"] {
+  padding: 6px;
+}
+
+#contactForm button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#contactStatus {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .contact-wrapper {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+</style>
+
+<div class="contact-wrapper">
+  <h1>Contact Us</h1>
+  <p>Have questions or want to reach out? Fill the form below.</p>
+
+  <form id="contactForm" enctype="multipart/form-data">
+    <input type="text" name="fullName" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <input type="file" name="attachment">
+    <button type="submit" class="btn btn-primary">Send Message</button>
+    <div id="contactStatus"></div>
+  </form>
+</div>
+
+<script>
+document.getElementById("contactForm").onsubmit = async function(e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const statusDiv = document.getElementById("contactStatus");
+
+    statusDiv.style.color = "#333";
+    statusDiv.innerHTML = "Sending...";
+
+    const response = await fetch("{{ url_for('contact_submit') }}", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        statusDiv.style.color = "green";
+        statusDiv.innerHTML = "Message sent successfully!";
+        this.reset();
+
+        setTimeout(() => {
+            statusDiv.innerHTML = "";
+        }, 3000);
+
+    } else {
+        statusDiv.style.color = "red";
+        statusDiv.innerHTML = "Error: " + data.error;
+
+        setTimeout(() => {
+            statusDiv.innerHTML = "";
+        }, 3000);
+    }
+};
+</script>
+{% endblock %}

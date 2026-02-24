@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}Student Dashboard | Kirwara Vocational Training Center{% endblock %}
+
+{% block content %}
+<style>
+.dashboard-container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.dashboard-container h2 {
+  color: #0a4b78;
+  margin-bottom: 20px;
+}
+
+.dashboard-flex {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.passport-box img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.no-photo {
+  width: 160px;
+  height: 160px;
+  border: 1px dashed #aaa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #777;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.info-table th,
+.info-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.info-table th {
+  background: #f4f6f8;
+  width: 35%;
+}
+
+.dashboard-actions {
+  margin-top: 20px;
+}
+
+.dashboard-actions a {
+  display: inline-block;
+  padding: 10px 16px;
+  margin-right: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #0b7dda;
+}
+
+.btn-primary:hover {
+  background: #095c9d;
+}
+
+.btn-danger {
+  background: #d9534f;
+}
+
+.btn-danger:hover {
+  background: #c9302c;
+}
+</style>
+
+<div class="dashboard-container">
+  <h2>Welcome, {{ student[0] }}</h2>
+
+  <div class="dashboard-flex">
+
+    <!-- Passport -->
+    <div class="passport-box">
+      {% if student[12] %}
+        <img src="{{ url_for('static', filename='uploads/passports/' ~ student[12]) }}" alt="Passport Photo">
+      {% else %}
+        <div class="no-photo">No Photo</div>
+      {% endif %}
+    </div>
+
+    <!-- Student Details -->
+    <div style="flex:1;">
+      <table class="info-table">
+        <tr><th>Full Name</th><td>{{ student[0] }}</td></tr>
+        <tr><th>Date of Birth</th><td>{{ student[1] }}</td></tr>
+        <tr><th>Gender</th><td>{{ student[2] }}</td></tr>
+        <tr><th>Email</th><td>{{ student[3] }}</td></tr>
+        <tr><th>Phone</th><td>{{ student[4] }}</td></tr>
+        <tr><th>Course</th><td>{{ student[5] }}</td></tr>
+        <tr><th>Constituency</th><td>{{ student[6] }}</td></tr>
+        <tr><th>Admission No</th><td>{{ student[7] }}</td></tr>
+        <tr><th>Payment Status</th><td>{{ student[8] }}</td></tr>
+        <tr><th>Amount Paid</th><td>KES {{ student[9] }}</td></tr>
+        <tr><th>Notes</th><td>{{ student[10] }}</td></tr>
+      </table>
+
+      <div class="dashboard-actions">
+        <a href="{{ url_for('student_profile') }}" class="btn-primary">Edit Profile</a>
+        <a href="{{ url_for('student_logout') }}" class="btn-danger">Logout</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

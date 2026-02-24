@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block title %}Edit Student | Kirwara VTC{% endblock %}
+
+{% block content %}
+<style>
+/* Container */
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+.container h2 {
+  color: #0a4b78;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form */
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form input[type="date"],
+form select,
+form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Image preview */
+form img {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+button[type="submit"],
+.cancel-btn {
+  padding: 10px 18px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  transition: background 0.3s;
+}
+
+button[type="submit"] {
+  background: #0b7dda;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background: #095c9d;
+}
+
+.cancel-btn {
+  background: #999;
+  color: white;
+  margin-left: 10px;
+}
+
+.cancel-btn:hover {
+  background: #666;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+}
+</style>
+
+<div class="container">
+  <h2>Edit Student Application</h2>
+
+  <form method="POST" enctype="multipart/form-data">
+    <label>Full Name</label>
+    <input type="text" name="fullname" value="{{ student[0] }}" required>
+
+    <label>Date of Birth</label>
+    <input type="date" name="dob" value="{{ student[1] }}">
+
+    <label>Gender</label>
+    <select name="gender">
+      <option value="Male" {% if student[2] == 'Male' %}selected{% endif %}>Male</option>
+      <option value="Female" {% if student[2] == 'Female' %}selected{% endif %}>Female</option>
+    </select>
+
+    <label>Email</label>
+    <input type="email" name="email" value="{{ student[3] }}">
+
+    <label>Phone</label>
+    <input type="text" name="phone" value="{{ student[4] }}">
+
+    <label>Course</label>
+    <input type="text" name="course" value="{{ student[5] }}">
+
+    <label>Constituency</label>
+    <input type="text" name="constituency" value="{{ student[6] }}">
+
+    <label>Admission Number</label>
+    <input type="text" name="admission_no" value="{{ student[7] }}">
+
+    <label>Payment Status</label>
+    <select name="payment_status">
+      <option value="Pending" {% if student[8] == 'Pending' %}selected{% endif %}>Pending</option>
+      <option value="Paid" {% if student[8] == 'Paid' %}selected{% endif %}>Paid</option>
+    </select>
+
+    <label>Amount Paid</label>
+    <input type="number" name="amount_paid" value="{{ student[9] }}" min="0">
+
+    <label>Notes</label>
+    <textarea name="notes">{{ student[10] }}</textarea>
+
+    <label>Password (leave blank to keep current)</label>
+    <input type="password" name="password" value="{{ student[11] }}">
+
+    <label>Passport Photo</label>
+    {% if student[12] %}
+      <img src="{{ url_for('static', filename='uploads/' ~ student[12]) }}" alt="Passport" style="width:100px;">
+    {% endif %}
+    <input type="file" name="passport" accept="image/*">
+
+    <button type="submit">Save Changes</button>
+    <a href="{{ url_for('admin') }}" class="cancel-btn">Cancel</a>
+  </form>
+</div>
+{% endblock %}

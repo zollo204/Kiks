@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}Instructor Login | Kirwara VTC{% endblock %}
+
+{% block content %}
+<div class="login-wrapper">
+  <div class="login-box">
+    <h2>Instructor Login</h2>
+
+    {% if error %}
+      <div class="error-msg">{{ error }}</div>
+    {% endif %}
+
+    {% if message %}
+      <div class="success-msg">{{ message }}</div>
+    {% endif %}
+
+    <!-- LOGIN FORM -->
+    <form method="POST">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter your username" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <div class="password-wrapper">
+          <input type="password" name="password" id="password" required>
+          <span onclick="togglePassword(this)">Show</span>
+        </div>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="forgot-section">
+      <a href="javascript:void(0)" onclick="showForgot()">Forgot Password?</a>
+
+      <!-- FORGOT PASSWORD FORM -->
+      <form method="POST" id="forgot-form" class="forgot-form">
+        <label>Enter your Username</label>
+        <input type="text" name="username_forgot" placeholder="Username">
+        <button type="submit" class="login-btn">Send Request</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<style>
+/* FULL PAGE CENTER */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+}
+
+/* LOGIN CARD */
+.login-box {
+  width: 100%;
+  max-width: 380px;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* HEADINGS */
+.login-box h2 {
+  margin-bottom: 25px;
+  color: #0b7dda;
+}
+
+/* FORM GROUP */
+.form-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* INPUT FIELDS */
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* PASSWORD WRAPPER */
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #0b7dda;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+/* BUTTON */
+.login-btn {
+  width: 100%;
+  padding: 10px;
+  background: #0b7dda;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #095c9d;
+}
+
+/* MESSAGES */
+.error-msg {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.success-msg {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* FORGOT SECTION */
+.forgot-section {
+  margin-top: 15px;
+}
+
+.forgot-section a {
+  font-size: 13px;
+  color: #0b7dda;
+  text-decoration: none;
+}
+
+.forgot-section a:hover {
+  text-decoration: underline;
+}
+
+.forgot-form {
+  display: none;
+  margin-top: 15px;
+  text-align: left;
+}
+</style>
+
+<script>
+function togglePassword(element){
+  const pw = document.getElementById('password');
+  if(pw.type === 'password'){
+    pw.type = 'text';
+    element.innerText = 'Hide';
+  } else {
+    pw.type = 'password';
+    element.innerText = 'Show';
+  }
+}
+
+function showForgot(){
+  const form = document.getElementById('forgot-form');
+  form.style.display = form.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+
+{% endblock %}

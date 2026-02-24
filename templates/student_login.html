@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block title %}Student Login | Kirwara Vocational Training Center{% endblock %}
+
+{% block content %}
+
+<style>
+* { box-sizing: border-box; }
+
+.login-card {
+  max-width: 420px;
+  margin: 70px auto;
+  background: #ffffff;
+  padding: 28px 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 22px;
+  color: #0a4b78;
+}
+
+.login-card input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+.login-card input:focus {
+  border-color: #0b7dda;
+  outline: none;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 44px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  cursor: pointer;
+  color: #555;
+}
+
+.login-card button {
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  background: #0b7dda;
+  color: white;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background: #095c9d;
+}
+
+.msg {
+  text-align: center;
+  color: green;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.extra-links {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+.extra-links a {
+  color: #0b7dda;
+  text-decoration: none;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+}
+</style>
+
+<!-- ================= LOGIN CARD ================= -->
+<div class="login-card" id="loginCard"
+     {% if show_forgot %}style="display:none;"{% endif %}>
+  <h2>Student Login</h2>
+
+  {% if message and not show_forgot %}
+    <p class="msg">{{ message }}</p>
+  {% endif %}
+
+  <form method="POST">
+    <input type="text" name="admission_no" placeholder="Admission Number" required>
+
+    <div class="password-wrapper">
+      <input type="password" id="password" name="password" placeholder="Password" required>
+      <span class="toggle-password" onclick="togglePassword()">👁️</span>
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <div class="extra-links">
+    <a href="#" onclick="showForgot()">Forgot password?</a>
+  </div>
+</div>
+
+<!-- ================= FORGOT PASSWORD CARD ================= -->
+<div class="login-card" id="forgotCard"
+     {% if not show_forgot %}style="display:none;"{% endif %}>
+  <h2>Forgot Password</h2>
+
+  {% if message and show_forgot %}
+    <p class="msg">{{ message }}</p>
+  {% endif %}
+
+  <p style="text-align:center; font-size:14px; margin-bottom:15px;">
+    Enter your admission number.<br>
+    Your request will be sent to the admin.
+  </p>
+
+  <form method="POST" action="{{ url_for('forgot_password') }}">
+    <input type="text" name="admission_no" placeholder="Admission Number" required>
+    <button type="submit">Send Request</button>
+  </form>
+
+  <div class="extra-links">
+    <a href="#" onclick="showLogin()">Back to login</a>
+  </div>
+</div>
+
+<script>
+function togglePassword() {
+  const pwd = document.getElementById("password");
+  pwd.type = pwd.type === "password" ? "text" : "password";
+}
+
+function showForgot() {
+  document.getElementById("loginCard").style.display = "none";
+  document.getElementById("forgotCard").style.display = "block";
+}
+
+function showLogin() {
+  document.getElementById("forgotCard").style.display = "none";
+  document.getElementById("loginCard").style.display = "block";
+}
+</script>
+
+{% endblock %}

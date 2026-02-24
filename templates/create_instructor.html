@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}Create Instructor | Kirwara VTC{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h1>Create Instructor</h1>
+  <a href="{{ url_for('admin') }}" class="btn btn-secondary" style="float:right;">Back to Dashboard</a>
+  <br><br>
+
+  {% if message %}
+    <div class="success-msg">{{ message }}</div>
+  {% endif %}
+
+  <form method="POST" action="{{ url_for('create_instructor') }}">
+    <label>Full Name</label>
+    <input type="text" name="fullname" placeholder="Enter instructor full name" required>
+
+    <label>Username</label>
+    <input type="text" name="username" placeholder="Enter instructor username" required>
+
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter password" required>
+
+    <label>Course</label>
+    <input type="text" name="course" placeholder="Course assigned to instructor" required>
+
+    <button type="submit" class="btn btn-primary">Create Instructor</button>
+  </form>
+</div>
+
+<style>
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: #0a4b78;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  padding: 10px 18px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #0b7dda;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #095c9d;
+}
+
+.btn-secondary {
+  background: #777;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #555;
+}
+
+.success-msg {
+  background: #d4edda;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #c3e6cb;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Student Examination Results{% endblock %}
+
+{% block content %}
+<div class="container">
+<h2>Student Examination Results</h2>
+
+<form method="POST" enctype="multipart/form-data" class="card">
+  <input name="adm" placeholder="Admission Number" required>
+  <input name="name" placeholder="Student Name" required>
+  <input name="course" placeholder="Course" required>
+  <input name="year" type="number" placeholder="Year" required>
+
+  <select name="achievement" required>
+    <option value="">Achievement</option>
+    <option>First Class</option>
+    <option>Second Class Upper</option>
+    <option>Second Class Lower</option>
+    <option>Pass</option>
+    <option>Fail</option>
+  </select>
+
+  <input type="file" name="passport">
+  <button>Add Result</button>
+</form>
+
+<table>
+<tr>
+  <th>Adm No</th>
+  <th>Name</th>
+  <th>Course</th>
+  <th>Year</th>
+  <th>Achievement</th>
+  <th>Passport</th>
+</tr>
+
+{% for r in results %}
+<tr>
+  <td>{{ r[0] }}</td>
+  <td>{{ r[1] }}</td>
+  <td>{{ r[2] }}</td>
+  <td>{{ r[3] }}</td>
+  <td>{{ r[4] }}</td>
+  <td>
+    {% if r[5] %}
+      <img src="{{ url_for('static', filename=r[5]) }}" width="50">
+    {% endif %}
+  </td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<style>
+.card{padding:15px;background:#fff;margin-bottom:20px}
+input,select{width:100%;margin:5px 0;padding:8px}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ddd;padding:8px}
+</style>
+{% endblock %}

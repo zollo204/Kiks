@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}About Us | Kirwara Vocational Training Center{% endblock %}
+
+{% block content %}
+
+<div style="max-width:1100px; margin:auto; padding:30px 20px;">
+
+  <!-- INTRO -->
+  <section style="background:white; padding:25px; border-radius:8px; margin-bottom:30px;">
+    <h1 style="color:#003366;">About Kirwara Vocational Training Center</h1>
+    <p>
+      Kirwara Vocational Training Center (KVTC) is a registered vocational
+      institution dedicated to equipping learners with practical, hands-on
+      skills that meet current industry demands. We focus on empowering youth
+      and adults with technical knowledge that leads to employment,
+      self-reliance, and entrepreneurship.
+    </p>
+  </section>
+
+  <!-- MISSION, VISION, VALUES -->
+  <section style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; margin-bottom:30px;">
+    <div style="background:white; padding:20px; border-radius:8px;">
+      <h3 style="margin-top:0; color:#0055aa;">Our Mission</h3>
+      <p>To provide affordable, high-quality technical and vocational training
+      that empowers learners with relevant skills for the job market and
+      self-employment.</p>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:8px;">
+      <h3 style="margin-top:0; color:#0055aa;">Our Vision</h3>
+      <p>To be a leading vocational training center in Kenya, producing skilled,
+      disciplined, and innovative professionals.</p>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:8px;">
+      <h3 style="margin-top:0; color:#0055aa;">Our Core Values</h3>
+      <ul>
+        <li>Integrity and professionalism</li>
+        <li>Practical skills and innovation</li>
+        <li>Discipline and teamwork</li>
+        <li>Community empowerment</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- COURSES & TRAINING -->
+  <section style="background:#e6f0ff; padding:25px; border-radius:8px; margin-bottom:30px;">
+    <h2 style="color:#003366;">Our Training Programs</h2>
+    <p>We offer market-driven courses designed to meet local and national industry needs. Our programs combine theory with practical training.</p>
+    <ul>
+      <li>Information Communication Technology (ICT)</li>
+      <li>Electrical Installation</li>
+      <li>Motor Vehicle Mechanics</li>
+      <li>Building Construction (Floor tilling and Painting)</li>
+      <li>Hairdressing & Beauty Therapy</li>
+      <li>Fashion Design & Tailoring</li>
+      <li>Catering</li>
+    </ul>
+  </section>
+
+  <!-- FACILITIES -->
+  <section style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px; margin-bottom:30px;">
+    
+    <div style="background:white; padding:20px; border-radius:8px;">
+      <h3 style="margin-top:0; color:#0055aa;">Modern Facilities</h3>
+      <p>Workshops, computer labs, and classrooms equipped for effective hands-on learning.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(120px,1fr)); gap:10px; text-align:center; margin-top:15px;">
+        <div>
+          <img src="{{ url_for('static', filename='images/computer.jpg') }}" alt="Computer Lab" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Computer Lab</h4>
+        </div>
+        <div>
+          <img src="{{ url_for('static', filename='images/power.jpg') }}" alt="Electrical Tools" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Electrical Tools</h4>
+        </div>
+        <div>
+          <img src="{{ url_for('static', filename='images/pipe.jpg') }}" alt="Plumbing" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Plumbing</h4>
+        </div>
+        <div>
+          <img src="{{ url_for('static', filename='images/hair.jpg') }}" alt="Hair Dressing" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Hair Dressing</h4>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:8px;">
+      <h3 style="margin-top:0; color:#0055aa;">Qualified Trainers</h3>
+      <p>Certified professionals with industry experience and passion for hands-on training.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:20px; margin-top:15px; text-align:center;">
+        <div style="background:#f9f9f9; padding:15px; border-radius:8px;">
+          <img src="{{ url_for('static', filename='images/trainer1.jpg') }}" alt="Manager" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Mr. Isaac Kagwi</h4>
+          <p><strong>Department:</strong> Manager</p>
+        </div>
+        <div style="background:#f9f9f9; padding:15px; border-radius:8px;">
+          <img src="{{ url_for('static', filename='images/trainer3.jpg') }}" alt="Electrical Trainer" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Mr. Peter Mwangi</h4>
+          <p><strong>Department:</strong> Electrical Installation</p>
+        </div>
+        <div style="background:#f9f9f9; padding:15px; border-radius:8px;">
+          <img src="{{ url_for('static', filename='images/trainer4.jpg') }}" alt="Plumbing Trainer" style="width:120px; height:120px; object-fit:cover; border-radius:50%; border:3px solid #003366;">
+          <h4>Mr. Joseph Kuria</h4>
+          <p><strong>Department:</strong> Plumbing Pipe-Fitter</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white; padding:20px; border-radius:8px;">
+      <h3 style="margin-top:0; color:#0055aa;">Industrial Attachment</h3>
+      <p>Students gain practical exposure in real work environments. Places include:</p>
+      <ul>
+        <li>Gatanga Waters and Sewage Company</li>
+        <li>County Government Projects</li>
+        <li>The Community</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section style="background:#e6f0ff; padding:25px; border-radius:8px; margin-bottom:30px;">
+    <h2 style="color:#003366;">Why Choose Kirwara VTC?</h2>
+    <ul>
+      <li>Affordable fees and flexible payment options</li>
+      <li>Hands-on practical training</li>
+      <li>Career guidance and mentorship</li>
+      <li>Support for self-employment and entrepreneurship</li>
+      <li>Strong community and industry links</li>
+    </ul>
+  </section>
+
+  <!-- LOCATION -->
+  <section style="background:#e6f0ff; padding:25px; border-radius:8px; margin-bottom:30px;">
+    <h2 style="color:#003366;">Geographical Location</h2>
+    <p>From Kirwara off to community opposite Gichombo Primary</p>
+  </section>
+
+</div>
+
+{% endblock %}
