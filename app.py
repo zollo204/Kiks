@@ -676,6 +676,7 @@ def stk_push(phone, amount):
     }
 
     response = requests.post(url, json=payload, headers=headers)
+    print("STK RESPONSE:", response.text)
     return response.json()
 
 # Payment page
@@ -708,6 +709,7 @@ def callback():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
 
 
