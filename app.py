@@ -38,12 +38,20 @@ shortcode = os.getenv("SHORTCODE")
 # ===============================
 # M-PESA ACCESS TOKEN FUNCTION
 # ===============================
-
 def get_access_token():
     url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
-    return response.json().get('access_token')
-# -----------------------------
+    
+    response = requests.get(
+        url,
+        auth=HTTPBasicAuth(consumer_key, consumer_secret)
+    )
+
+    print("TOKEN RESPONSE:", response.text)
+
+    if response.status_code != 200:
+        raise Exception("Failed to get access token")
+
+    return response.json().get("access_token")
 # CONFIG
 # -----------------------------
 
@@ -700,6 +708,7 @@ def callback():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
 
 
