@@ -1,14 +1,48 @@
+# ===============================
+# IMPORTS
+# ===============================
+
 import os
 import csv
+import requests
+import base64
 from datetime import datetime
+from requests.auth import HTTPBasicAuth
+
 from flask import (
     Flask, render_template, request, redirect,
     url_for, session, jsonify, send_from_directory
 )
+
 from werkzeug.security import generate_password_hash, check_password_hash
 
+
+# ===============================
+# APP INITIALIZATION
+# ===============================
+
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = os.getenv("SECRET_KEY", "secret123")  # Use environment variable if possible
+
+
+# ===============================
+# M-PESA ENVIRONMENT VARIABLES
+# ===============================
+
+consumer_key = os.getenv("awFICQ3XydFTsJTZp0SNJOSxGSx5zeAdlHuc1d6T2rWQvwGN")
+consumer_secret = os.getenv("KzGBDBfuHxfnkWMpJ1UvdaAr4nY9ivKVRS3JZMZppr8aVcHB2fw5LM5GNFgsR85n")
+passkey = os.getenv("PASSKEY")
+shortcode = os.getenv("174379")
+
+
+# ===============================
+# M-PESA ACCESS TOKEN FUNCTION
+# ===============================
+
+def get_access_token():
+    url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
+    response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
+    return response.json().get('access_token')
 
 # -----------------------------
 # CONFIG
@@ -614,4 +648,5 @@ def student_logout():
 # =========================
 
 if __name__ == "__main__":
+
     app.run(debug=True)
