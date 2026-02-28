@@ -4,7 +4,7 @@
 {% block content %}
 <style>
 /* ===== Admission Form Styling ===== */
-.form-wrapper {
+.form-wrapper, .payment-wrapper {
   max-width: 650px;
   margin: 40px auto;
   background: #ffffff;
@@ -13,21 +13,19 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-.form-wrapper h2 {
+.form-wrapper h2, .payment-wrapper h3 {
   text-align: center;
-  margin-bottom: 20px;
   color: #0a4b78;
 }
 
-#admissionForm label {
+#admissionForm label, .payment-wrapper label {
   display: block;
   margin-top: 15px;
   font-weight: bold;
 }
 
-#admissionForm input,
-#admissionForm select,
-#admissionForm textarea {
+#admissionForm input, #admissionForm select, #admissionForm textarea,
+.payment-wrapper input {
   width: 100%;
   padding: 10px;
   margin-top: 6px;
@@ -36,14 +34,7 @@
   font-size: 14px;
 }
 
-#admissionForm textarea {
-  resize: vertical;
-  min-height: 90px;
-}
-
-#admissionForm select {
-  background: #fff;
-}
+#admissionForm textarea { resize: vertical; min-height: 90px; }
 
 #admissionForm button {
   width: 100%;
@@ -59,16 +50,35 @@
   transition: background 0.3s;
 }
 
-#admissionForm button:hover {
-  background: #095c9d;
+#admissionForm button:hover { background: #095c9d; }
+
+.payment-wrapper button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.payment-wrapper button:hover { background: #218838; }
+
+#paymentResult {
+  margin-top: 20px;
+  background-color: #e9ecef;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-wrap;
 }
 
 /* Mobile Friendly */
 @media (max-width: 600px) {
-  .form-wrapper {
-    padding: 20px;
-    margin: 20px;
-  }
+  .form-wrapper, .payment-wrapper { padding: 20px; margin: 20px; }
 }
 </style>
 
@@ -76,7 +86,6 @@
   <h2>Online Admission Form</h2>
 
   <form id="admissionForm" method="POST" action="/register" enctype="multipart/form-data">
-
     <label>Full Name</label>
     <input type="text" name="fullname" required>
 
@@ -90,7 +99,6 @@
       <option value="Female">Female</option>
     </select>
    
-
     <label>Email</label>
     <input type="email" name="email" placeholder="example@email.com">
 
@@ -133,5 +141,55 @@
     <button type="submit">Submit Application</button>
   </form>
 </div>
-{% endblock %}
 
+<!-- ================= PAYMENT SECTION ================= -->
+<div class="payment-wrapper">
+  <h3>Pay Admission Fee</h3>
+  <form id="paymentForm">
+    <label>Phone Number (2547XXXXXXXX)</label>
+    <input type="text" name="phone" id="payPhone" placeholder="2547XXXXXXXX" required>
+
+    <label>Amount (KES)</label>
+    <input type="number" name="amount" placeholder="1" required>
+
+    <button type="submit">Pay Now</button>
+  </form>
+  <div id="paymentResult"></div>
+</div>
+
+<script>
+const admissionForm = document.getElementById("admissionForm");
+const paymentPhone = document.getElementById("payPhone");
+const paymentForm = document.getElementById("paymentForm");
+const paymentResult = document.getElementById("paymentResult");
+
+// Auto-fill phone in payment form after admission form submission
+admissionForm.addEventListener("submit", function(e) {
+    const phoneField = admissionForm.querySelector('input[name="phone"]');
+    if (phoneField && phoneField.value) {
+        paymentPhone.value = phoneField.value.startsWith('0') ? 
+            '254' + phoneField.value.substring(1) : phoneField.value;
+    }
+});
+
+// Handle payment form submission
+paymentForm.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const formData = new FormData(paymentForm);
+
+    const response = await fetch("/pay", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.error) {
+        paymentResult.innerHTML = "Error: " + data.error;
+    } else {
+        paymentResult.innerHTML = "Payment request sent! Check your phone.\n\nResponse:\n" + JSON.stringify(data, null, 2);
+    }
+});
+</script>
+
+{% endblock %}
