@@ -25,33 +25,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "secret123")  # Use environment variable if possible
 
 
-# ===============================
-# M-PESA ENVIRONMENT VARIABLES
-# ===============================
-
-consumer_key = os.getenv("CONSUMER_KEY")
-consumer_secret = os.getenv("CONSUMER_SECRET")
-passkey = os.getenv("PASSKEY")
-shortcode = os.getenv("SHORTCODE")
-
-
-# ===============================
-# M-PESA ACCESS TOKEN FUNCTION
-# ===============================
-def get_access_token():
-    url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    
-    response = requests.get(
-        url,
-        auth=HTTPBasicAuth(consumer_key, consumer_secret)
-    )
-
-    print("TOKEN RESPONSE:", response.text)
-
-    if response.status_code != 200:
-        raise Exception("Failed to get access token")
-
-    return response.json().get("access_token")
 # CONFIG
 # -----------------------------
 
@@ -649,59 +622,6 @@ def logout():
 def student_logout():
     session.clear()
     return redirect(url_for("student_login"))
-# M-PESA STK Push function
-def stk_push(phone, amount):
-    access_token = get_access_token()
-    url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
-
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    password = base64.b64encode((shortcode + passkey + timestamp).encode()).decode()
-
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
-
-    payload = {
-        "BusinessShortCode": shortcode,
-        "Password": password,
-        "Timestamp": timestamp,
-        "TransactionType": "CustomerPayBillOnline",
-        "Amount": int(amount),
-        "PartyA": phone,
-        "PartyB": shortcode,
-        "PhoneNumber": phone,
-        "CallBackURL": "https://kiks-erge.onrender.com/callback",
-        "AccountReference": "OrderPayment",
-        "TransactionDesc": "Website Payment"
-    }
-
-    response = requests.post(url, json=payload, headers=headers)
-    print("STK RESPONSE:", response.text)
-    return response.json()
-
-# Payment page
-@app.route("/pay-fees")
-def pay_fees():
-    return render_template("pay_fees.html")
-
-# Payment submission route
-@app.route("/pay", methods=["POST"])
-def pay():
-    phone = request.form.get("phone")
-    amount = request.form.get("amount")
-
-    if not phone or not amount:
-        return jsonify({"error": "Phone and amount required"}), 400
-
-    response = stk_push(phone, amount)
-    return jsonify(response)
-
-# Callback route
-@app.route("/callback", methods=["POST"])
-def callback():
-    data = request.get_json()
-    print("MPESA CALLBACK:", data)  # Logs payment confirmation
-    return jsonify({"ResultCode": 0, "ResultDesc": "Accepted"})
 # =========================
 # RUN
 # =========================
@@ -709,6 +629,7 @@ def callback():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
 
 
