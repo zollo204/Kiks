@@ -29,10 +29,10 @@ app.secret_key = os.getenv("SECRET_KEY", "secret123")  # Use environment variabl
 # M-PESA ENVIRONMENT VARIABLES
 # ===============================
 
-consumer_key = os.getenv("awFICQ3XydFTsJTZp0SNJOSxGSx5zeAdlHuc1d6T2rWQvwGN")
-consumer_secret = os.getenv("KzGBDBfuHxfnkWMpJ1UvdaAr4nY9ivKVRS3JZMZppr8aVcHB2fw5LM5GNFgsR85n")
-passkey = os.getenv("bfb279f9aa9bdbcf158e97dd71a467cd2eOc893059b10f78e6b72ada1ed2 c919")
-shortcode = os.getenv("174379")
+consumer_key = os.getenv("CONSUMER_KEY")
+consumer_secret = os.getenv("CONSUMER_SECRET")
+passkey = os.getenv("PASSKEY")
+shortcode = os.getenv("SHORTCODE")
 
 
 # ===============================
@@ -43,10 +43,6 @@ def get_access_token():
     url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
     response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
     return response.json().get('access_token')
-def get_access_token():
-    url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials"
-    response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
-    return response.json().get("access_token")
 # -----------------------------
 # CONFIG
 # -----------------------------
@@ -666,7 +662,7 @@ def stk_push(phone, amount):
         "PartyA": phone,
         "PartyB": shortcode,
         "PhoneNumber": phone,
-        "CallBackURL": "https://yourapp.onrender.com/callback",
+        "CallBackURL": "https://kiks-erge.onrender.com/callback",
         "AccountReference": "OrderPayment",
         "TransactionDesc": "Website Payment"
     }
@@ -704,6 +700,7 @@ def callback():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
 
 
