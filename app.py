@@ -675,9 +675,9 @@ def stk_push(phone, amount):
     return response.json()
 
 # Payment page
-@app.route("/payment")
-def payment_page():
-    return render_template("payment.html")
+@app.route("/pay-fees")
+def pay_fees():
+    return render_template("pay_fees.html")
 
 # Payment submission route
 @app.route("/pay", methods=["POST"])
@@ -704,4 +704,5 @@ def callback():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
