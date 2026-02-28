@@ -1,195 +1,133 @@
+Lets add that payment option to my admission form at the bottom
 {% extends "base.html" %}
 {% block title %}Online Admission | Kirwara VTC{% endblock %}
 
 {% block content %}
-<style>
-/* ===== Admission Form Styling ===== */
-.form-wrapper, .payment-wrapper {
-  max-width: 650px;
-  margin: 40px auto;
-  background: #ffffff;
-  padding: 25px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
 
-.form-wrapper h2, .payment-wrapper h3 {
-  text-align: center;
-  color: #0a4b78;
-}
+<style>  
+/* ===== Admission Form Styling ===== */  
+.form-wrapper {  
+  max-width: 650px;  
+  margin: 40px auto;  
+  background: #ffffff;  
+  padding: 25px 30px;  
+  border-radius: 8px;  
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);  
+}  
+  
+.form-wrapper h2 {  
+  text-align: center;  
+  margin-bottom: 20px;  
+  color: #0a4b78;  
+}  
+  
+#admissionForm label {  
+  display: block;  
+  margin-top: 15px;  
+  font-weight: bold;  
+}  
+  
+#admissionForm input,  
+#admissionForm select,  
+#admissionForm textarea {  
+  width: 100%;  
+  padding: 10px;  
+  margin-top: 6px;  
+  border-radius: 5px;  
+  border: 1px solid #ccc;  
+  font-size: 14px;  
+}  
+  
+#admissionForm textarea {  
+  resize: vertical;  
+  min-height: 90px;  
+}  
+  
+#admissionForm select {  
+  background: #fff;  
+}  
+  
+#admissionForm button {  
+  width: 100%;  
+  margin-top: 25px;  
+  padding: 12px;  
+  background: #0b7dda;  
+  color: white;  
+  border: none;  
+  border-radius: 6px;  
+  font-size: 16px;  
+  font-weight: bold;  
+  cursor: pointer;  
+  transition: background 0.3s;  
+}  
+  
+#admissionForm button:hover {  
+  background: #095c9d;  
+}  
+  
+/* Mobile Friendly */  
+@media (max-width: 600px) {  
+  .form-wrapper {  
+    padding: 20px;  
+    margin: 20px;  
+  }  
+}  
+</style>  <div class="form-wrapper">  
+  <h2>Online Admission Form</h2>    <form id="admissionForm" method="POST" action="/register" enctype="multipart/form-data">  <label>Full Name</label>  
+<input type="text" name="fullname" required>  
 
-#admissionForm label, .payment-wrapper label {
-  display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
+<label>Date of Birth</label>  
+<input type="date" name="dob" required>  
 
-#admissionForm input, #admissionForm select, #admissionForm textarea,
-.payment-wrapper input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 6px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-}
+<label>Gender</label>  
+<select name="gender" required>  
+  <option value="">Select Gender</option>  
+  <option value="Male">Male</option>  
+  <option value="Female">Female</option>  
+</select>  
+ 
 
-#admissionForm textarea { resize: vertical; min-height: 90px; }
+<label>Email</label>  
+<input type="email" name="email" placeholder="example@email.com">  
 
-#admissionForm button {
-  width: 100%;
-  margin-top: 25px;
-  padding: 12px;
-  background: #0b7dda;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
+<label>Phone Number</label>  
+<input type="tel" name="phone" placeholder="07XXXXXXXX" required>  
 
-#admissionForm button:hover { background: #095c9d; }
+<label>Constituency</label>  
+<select name="constituency" required>  
+  <option value="">Select Constituency</option>  
+  <option>Mugumo-ini</option>  
+  <option>Kakuzi</option>  
+  <option>Kihumbu-ini</option>  
+  <option>Gatanga</option>  
+  <option>Kariara</option>  
+  <option>Ithanga</option>  
+</select>  
 
-.payment-wrapper button {
-  width: 100%;
-  margin-top: 20px;
-  padding: 12px;
-  background: #28a745;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
+<label>Course</label>  
+<select name="course" required>  
+  <option value="">Select Course</option>  
+  <option>Motor Vehicle Mechanics</option>  
+  <option>Tiling</option>  
+  <option>Painting & Decoration</option>  
+  <option>Fashion Design</option>  
+  <option>Catering</option>  
+  <option>Hair Dressing & Beauty</option>  
+  <option>Electrical Installation</option>  
+  <option>ICT</option>  
+</select>  
 
-.payment-wrapper button:hover { background: #218838; }
+<label>Parent / Guardian Name</label>  
+<input type="text" name="guardianName" required>  
 
-#paymentResult {
-  margin-top: 20px;
-  background-color: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  white-space: pre-wrap;
-}
+<label>Parent / Guardian Phone</label>  
+<input type="tel" name="guardianPhone" required>  
 
-/* Mobile Friendly */
-@media (max-width: 600px) {
-  .form-wrapper, .payment-wrapper { padding: 20px; margin: 20px; }
-}
-</style>
+<label>Additional Information</label>  
+<textarea name="additional" placeholder="Optional"></textarea>  
 
-<div class="form-wrapper">
-  <h2>Online Admission Form</h2>
+<button type="submit">Submit Application</button>
 
-  <form id="admissionForm" method="POST" action="/register" enctype="multipart/form-data">
-    <label>Full Name</label>
-    <input type="text" name="fullname" required>
-
-    <label>Date of Birth</label>
-    <input type="date" name="dob" required>
-
-    <label>Gender</label>
-    <select name="gender" required>
-      <option value="">Select Gender</option>
-      <option value="Male">Male</option>
-      <option value="Female">Female</option>
-    </select>
-   
-    <label>Email</label>
-    <input type="email" name="email" placeholder="example@email.com">
-
-    <label>Phone Number</label>
-    <input type="tel" name="phone" placeholder="07XXXXXXXX" required>
-
-    <label>Constituency</label>
-    <select name="constituency" required>
-      <option value="">Select Constituency</option>
-      <option>Mugumo-ini</option>
-      <option>Kakuzi</option>
-      <option>Kihumbu-ini</option>
-      <option>Gatanga</option>
-      <option>Kariara</option>
-      <option>Ithanga</option>
-    </select>
-
-    <label>Course</label>
-    <select name="course" required>
-      <option value="">Select Course</option>
-      <option>Motor Vehicle Mechanics</option>
-      <option>Tiling</option>
-      <option>Painting & Decoration</option>
-      <option>Fashion Design</option>
-      <option>Catering</option>
-      <option>Hair Dressing & Beauty</option>
-      <option>Electrical Installation</option>
-      <option>ICT</option>
-    </select>
-
-    <label>Parent / Guardian Name</label>
-    <input type="text" name="guardianName" required>
-
-    <label>Parent / Guardian Phone</label>
-    <input type="tel" name="guardianPhone" required>
-
-    <label>Additional Information</label>
-    <textarea name="additional" placeholder="Optional"></textarea>
-
-    <button type="submit">Submit Application</button>
-  </form>
-</div>
-
-<!-- ================= PAYMENT SECTION ================= -->
-<div class="payment-wrapper">
-  <h3>Pay Admission Fee</h3>
-  <form id="paymentForm">
-    <label>Phone Number (2547XXXXXXXX)</label>
-    <input type="text" name="phone" id="payPhone" placeholder="2547XXXXXXXX" required>
-
-    <label>Amount (KES)</label>
-    <input type="number" name="amount" placeholder="1" required>
-
-    <button type="submit">Pay Now</button>
-  </form>
-  <div id="paymentResult"></div>
-</div>
-
-<script>
-const admissionForm = document.getElementById("admissionForm");
-const paymentPhone = document.getElementById("payPhone");
-const paymentForm = document.getElementById("paymentForm");
-const paymentResult = document.getElementById("paymentResult");
-
-// Auto-fill phone in payment form after admission form submission
-admissionForm.addEventListener("submit", function(e) {
-    const phoneField = admissionForm.querySelector('input[name="phone"]');
-    if (phoneField && phoneField.value) {
-        paymentPhone.value = phoneField.value.startsWith('0') ? 
-            '254' + phoneField.value.substring(1) : phoneField.value;
-    }
-});
-
-// Handle payment form submission
-paymentForm.addEventListener("submit", async function(e) {
-    e.preventDefault();
-    const formData = new FormData(paymentForm);
-
-    const response = await fetch("/pay", {
-        method: "POST",
-        body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.error) {
-        paymentResult.innerHTML = "Error: " + data.error;
-    } else {
-        paymentResult.innerHTML = "Payment request sent! Check your phone.\n\nResponse:\n" + JSON.stringify(data, null, 2);
-    }
-});
-</script>
-
-{% endblock %}
+  </form>  
+</div>  
+{% endblock %}  
