@@ -31,7 +31,7 @@ app.secret_key = os.getenv("SECRET_KEY", "secret123")  # Use environment variabl
 
 consumer_key = os.getenv("awFICQ3XydFTsJTZp0SNJOSxGSx5zeAdlHuc1d6T2rWQvwGN")
 consumer_secret = os.getenv("KzGBDBfuHxfnkWMpJ1UvdaAr4nY9ivKVRS3JZMZppr8aVcHB2fw5LM5GNFgsR85n")
-passkey = os.getenv("PASSKEY")
+passkey = os.getenv("bfb279f9aa9bdbcf158e97dd71a467cd2eOc893059b10f78e6b72ada1ed2 c919")
 shortcode = os.getenv("174379")
 
 
@@ -704,5 +704,6 @@ def callback():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
 
 
